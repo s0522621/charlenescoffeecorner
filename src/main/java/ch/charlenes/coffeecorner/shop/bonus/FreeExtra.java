@@ -35,5 +35,4 @@ public class FreeExtra implements IBonusCalculator {
                 .collect(Collectors.toList());
     }
 
-
 }

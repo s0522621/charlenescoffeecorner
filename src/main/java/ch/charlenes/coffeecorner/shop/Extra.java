@@ -1,6 +1,5 @@
 package ch.charlenes.coffeecorner.shop;
 
-import static ch.charlenes.coffeecorner.shop.ItemType.EXTRA;
 
 public enum Extra {
 
@@ -18,10 +17,6 @@ public enum Extra {
 
     public String getDescription() {
         return description;
-    }
-
-    public ItemType getType() {
-        return EXTRA;
     }
 
     public double getPrice() {

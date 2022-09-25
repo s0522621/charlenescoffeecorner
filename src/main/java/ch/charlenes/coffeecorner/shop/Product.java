@@ -31,5 +31,4 @@ public enum Product {
     public ItemType getItemType() {
         return type;
     }
-
 }
