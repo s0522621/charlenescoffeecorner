@@ -1,29 +1,42 @@
 package ch.charlenes.coffeecorner.parser;
 
 import ch.charlenes.coffeecorner.shop.*;
+import ch.charlenes.coffeecorner.shop.bonus.BonusHelper;
+import ch.charlenes.coffeecorner.shop.bonus.BonusType;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static java.text.MessageFormat.format;
 
-public class OrderParser {
+public class BillParser {
 
     public static final String STOPWORD_WITH = " with ";
     public static final String DELIMETER = ", ";
 
-    public static Order parseFullOrder(String input) {
+    public static Bill parseBill(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("Order cannot be null or empty!");
         }
+        Bill bill = new Bill(parseOrder(input));
+        applyBoni(bill);
+        return bill;
+    }
+
+    private static Order parseOrder(String input) {
         Order order = new Order();
-        Arrays.stream((input).split(DELIMETER))
+        Arrays.stream(input.split(DELIMETER))
                 .forEach(singleOrder -> order.addItem(parseOrderItem(singleOrder)));
         return order;
     }
 
+    private static void applyBoni(Bill bill) {
+        Arrays.stream(BonusType.values())
+                .forEach(bonusType -> BonusHelper.getBonusCalculator(bonusType)
+                        .applyBonus(bill));
+    }
 
-    protected static OrderItem parseOrderItem(String singleOrder) {
+    private static OrderItem parseOrderItem(String singleOrder) {
         String[] split = singleOrder.split(STOPWORD_WITH);
         OrderItem orderItem = new OrderItem(parseProduct(split[0]));
         if (split.length > 1) {
