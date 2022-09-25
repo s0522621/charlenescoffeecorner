@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         if (args.length != 1) {
-            System.err.println("One argument expected! e.g. cshregister 'small coffee with extra milk'");
+            System.err.println("One argument expected! e.g. cashregister 'small coffee with extra milk'");
         }
         Order order = OrderParser.parseFullOrder(args[0]);
         Bill b = new Bill(order);
