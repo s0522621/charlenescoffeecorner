@@ -13,7 +13,7 @@ public class FreeExtra implements IBonusCalculator {
     public void applyBonus(Bill bill) {
         getDiscountedItems(BonusHelper.filterListByItemType(bill, ItemType.SNACK, ItemType.BEVERAGE, ItemType.COFFEE))
                 .stream()
-                .forEach(orderItem -> bill.addDiscount(new Discount(BonusType.CUSTOMERSTAMP, orderItem.getExtras().get(0), null)));
+                .forEach(orderItem -> bill.addDiscount(new Discount(BonusType.FREE_EXTRA, orderItem.getExtras().get(0), null)));
     }
 
     private List<OrderItem> getDiscountedItems(List<OrderItem> snackAndBeverageList) {
@@ -31,7 +31,7 @@ public class FreeExtra implements IBonusCalculator {
         return snackAndBeverageList.stream()
                 .limit(Math.min(nrOfBeverages, nrOfSnacks))
                 .filter(orderItem -> orderItem.getProduct().getItemType() == ItemType.COFFEE)
-                .filter(orderItem -> orderItem.getExtras().size() == 0)
+                .filter(orderItem -> orderItem.getExtras().size() > 0)
                 .collect(Collectors.toList());
     }
 

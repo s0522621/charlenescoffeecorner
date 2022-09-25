@@ -4,6 +4,7 @@ import ch.charlenes.coffeecorner.shop.Bill;
 import ch.charlenes.coffeecorner.shop.ItemType;
 import ch.charlenes.coffeecorner.shop.OrderItem;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,6 +21,9 @@ public class CustomerStamp implements IBonusCalculator {
     }
 
     private static List<OrderItem> getDiscountedItems(List<OrderItem> filteredList) {
+        if(filteredList.size() < STAMPCARD_SIZE) {
+            return Collections.emptyList();
+        }
         int limit = filteredList.size() / STAMPCARD_SIZE + Math.min(filteredList.size() % STAMPCARD_SIZE, 1);
 
         return Stream.iterate(0, i -> i + STAMPCARD_SIZE)
