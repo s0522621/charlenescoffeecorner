@@ -28,4 +28,26 @@ public class Discount {
     public Optional<Product> getProduct() {
         return product;
     }
+
+    public String getDescription() {
+        String description = bonusType.getDescription() + ": ";
+        if (extra.isPresent()) {
+            description += extra.get().getDescription();
+        }
+        if (product.isPresent()) {
+            description += product.get().getDescription();
+        }
+        return description;
+    }
+
+    public double getPrice() {
+        double price = 0;
+        if (extra.isPresent()) {
+            price += extra.get().getPrice();
+        }
+        if (product.isPresent()) {
+            price += product.get().getPrice();
+        }
+        return price;
+    }
 }
