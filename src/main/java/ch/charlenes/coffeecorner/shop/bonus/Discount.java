@@ -17,6 +17,10 @@ public class Discount {
         this.product = Optional.ofNullable(product);
     }
 
+    public BonusType getBonusType() {
+        return bonusType;
+    }
+
     public String getDescription() {
         String description = bonusType.getDescription() + ": ";
         if (extra.isPresent()) {
