@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 
 public class BonusHelper {
 
+    private BonusHelper() {
+        // private constructor to prevent instantiation
+    }
+
     public static IBonusCalculator getBonusCalculator(BonusType bonusType) {
         switch (bonusType) {
             case CUSTOMERSTAMP:
